@@ -22,7 +22,7 @@ services:
     volumes:
       - "./adguard/opt-adguard-work:/opt/adguardhome/work"
       - "./adguard/opt-adguard-conf:/opt/adguardhome/conf"
-	  ports:
+    ports:
       - 53:53/tcp # DNS connection
       - 53:53/udp # DNS connection
       #- 784:784/udp # DNS-over-QUIC service
@@ -30,5 +30,5 @@ services:
       - 3000:3000/tcp # AdGuard Home web panel
       - 80:80/tcp # AdGuard Home web panel HTTP
       - 443:443/tcp # AdGuard Home web panel HTTPS
-	    #- 67:67/udp # DHCP server
-	    #- 68:68/udp # DHCP server
+      #- 67:67/udp # DHCP server
+      #- 68:68/udp # DHCP server
