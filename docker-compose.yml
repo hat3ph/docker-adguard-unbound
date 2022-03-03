@@ -1,16 +1,16 @@
 version: "3"
 
 services:
-#  unbound:
-#    image: "mvance/unbound:latest"
-#    container_name: unbound
-#    restart: unless-stopped
-#    hostname: "unbound"
-#    volumes:
-#      - "./unbound:/opt/unbound/etc/unbound/"
-#    networks:
-#      private_network:
-#        ipv4_address: 10.2.0.200
+  unbound:
+    image: "mvance/unbound:latest"
+    container_name: unbound
+    restart: unless-stopped
+    hostname: "unbound"
+    volumes:
+      - "./unbound:/opt/unbound/etc/unbound/"
+    ports:
+      - 5335:53/tcp
+      - 5335:53/udp
 
   adguard:
     depends_on: [unbound]
@@ -25,10 +25,10 @@ services:
     ports:
       - 53:53/tcp # DNS connection
       - 53:53/udp # DNS connection
-      #- 784:784/udp # DNS-over-QUIC service
-      #- 853:853/tcp # DNS-over-TLS/QUIC service
       - 3000:3000/tcp # AdGuard Home web panel
       - 80:80/tcp # AdGuard Home web panel HTTP
-      - 443:443/tcp # AdGuard Home web panel HTTPS
+      #- 443:443/tcp # AdGuard Home web panel HTTPS
+      #- 784:784/udp # DNS-over-QUIC service
+      #- 853:853/tcp # DNS-over-TLS/QUIC service
       #- 67:67/udp # DHCP server
       #- 68:68/udp # DHCP server
