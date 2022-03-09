@@ -55,3 +55,6 @@ forward-zone:
 ## Access Adguard Interface (IMPORTANT)
 First connect to http://xxx.xxx.xxx.xxx:3000 first to setup AdGuard Home before DNS query and adblocking to work.
 The IP could be your local docker host IP or public IP for your cloud VPS.
+
+## DNS-over-HTTPS/TLS/QUIC
+To use DoH/DoT/DoQ encryption, first register and apply a valid FQDN and SSL certificate first.
