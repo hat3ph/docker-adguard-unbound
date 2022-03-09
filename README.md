@@ -55,9 +55,3 @@ forward-zone:
 ## Access Adguard Interface (IMPORTANT)
 First connect to http://xxx.xxx.xxx.xxx:3000 first to setup AdGuard Home before DNS query and adblocking to work.
 The IP could be your local docker host IP or public IP for your cloud VPS.
-
-## Wireguard Client Setup:
-1. Android: https://serversideup.net/how-to-configure-a-wireguard-android-vpn-client/
-2. iOS: https://serversideup.net/how-to-configure-a-wireguard-ios-client/
-3. Windows 10: https://serversideup.net/how-to-configure-a-wireguard-windows-10-vpn-client/
-4. Linux/Ubuntu: https://tech.serhatteker.com/post/2021-01/how-to-set-up-wireguard-client-on-ubuntu-desktop/
