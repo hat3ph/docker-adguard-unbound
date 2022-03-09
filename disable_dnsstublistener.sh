@@ -13,7 +13,7 @@ if (systemctl -q is-active $SERVICE)
                 printf "[Resolve]\nDNS=127.0.0.1\nDNSStubListener=no" > /etc/systemd/resolved.conf.d/adguardhome.conf
                 mv /etc/resolv.conf /etc/resolv.conf.backup
                 ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
-				echo "Restarting $SERVICE"
+		echo "Restarting $SERVICE"
                 systemctl restart $SERVICE
                 exit 1
         fi
