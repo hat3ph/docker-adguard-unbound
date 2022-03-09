@@ -1,34 +1,25 @@
 version: "3"
 
 services:
-  unbound:
-    image: "mvance/unbound:latest"
-    container_name: unbound
+  adguard-unbound:
+    container_name: adguard-unbound
+    image: lolgast/adguard-unbound
     restart: unless-stopped
-    hostname: "unbound"
-    volumes:
-      - "./unbound:/opt/unbound/etc/unbound/"
-    ports:
-      - 5335:53/tcp
-      - 5335:53/udp
-
-  adguard:
-    depends_on: [unbound]
-    container_name: adguard
-    image: adguard/adguardhome
-    restart: unless-stopped
-    hostname: adguard
+    hostname: adguard-unbound
     # Volumes store your data between container upgrades
     volumes:
       - "./adguard/opt-adguard-work:/opt/adguardhome/work"
       - "./adguard/opt-adguard-conf:/opt/adguardhome/conf"
+      - "./unbound:/opt/unbound/etc/unbound/"
     ports:
-      - 53:53/tcp # DNS connection
-      - 53:53/udp # DNS connection
+      - 53:53/tcp # AdGuard Home DNS connection
+      - 53:53/udp # AdGuard Home DNS connection
       - 3000:3000/tcp # AdGuard Home web panel
       - 80:80/tcp # AdGuard Home web panel HTTP
       #- 443:443/tcp # AdGuard Home web panel HTTPS
-      #- 784:784/udp # DNS-over-QUIC service
-      #- 853:853/tcp # DNS-over-TLS/QUIC service
+      #- 784:784/udp # AdGuard Home DNS-over-QUIC service
+      #- 853:853/tcp # AdGuard Home DNS-over-TLS/QUIC service
       #- 67:67/udp # DHCP server
       #- 68:68/udp # DHCP server
+      - 5053:5053/tcp # Unbound DNS connection
+      - 5053:5053/udp # Unbound DNS connection
