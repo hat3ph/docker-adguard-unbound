@@ -57,4 +57,8 @@ First connect to http://xxx.xxx.xxx.xxx:3000 first to setup AdGuard Home before 
 The IP could be your local docker host IP or public IP for your cloud VPS.
 
 ## DNS-over-HTTPS/TLS/QUIC
-To use DoH/DoT/DoQ encryption, first register and apply a valid FQDN and SSL certificate first.
+To use DoH/DoT/DoQ encryption, first register and apply a valid FQDN and SSL certificate first for AdGuard Home.
+
+## Disable open resolve to prevent DNS Amplication Attack
+If you run this in cloud as your provide DNS, advise to restrict DNS access to prevent DNS Amplication Attack.
+Setup cron job to run iptables_ddns_update.sh to update the iptables rule.
