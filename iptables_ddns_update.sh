@@ -2,10 +2,11 @@
 
 # create /etc/cron.d/iptables_ddns_update with below line...
 #MAILTO=""
-# run at reboot after 3 min
-#@reboot root sleep 180 && /home/ubuntu/iptables_ddns_update.sh > /dev/null 2>&1
+# change the location of the script path
+# run at reboot after 3 min after docker create the iptables rules
+#@reboot root sleep 180 && /path/iptables_ddns_update.sh > /dev/null 2>&1
 # run script every 5 min to check for DDNS IP change
-#*/5 * * * * root /home/ubuntu/iptables_ddns_update.sh > /dev/null 2>&1
+#*/5 * * * * root /path/iptables_ddns_update.sh > /dev/null 2>&1
 
 # your ddns hostname
 ddns_host="xxx.ddns.net"
@@ -32,5 +33,5 @@ if [ $ddns_ip != $current_ddns_ip ]; then
 	/sbin/iptables -R DOCKER 4 -p tcp --dport 53 -s $ddns_ip -j ACCEPT
 	/sbin/iptables -R DOCKER 5 -p udp --dport 53 -s $ddns_ip -j ACCEPT
 	# update/save the latest ddns ip to ddns_ip.txt
-  echo $ddns_ip > /tmp/ddns_ip.txt
+	echo $ddns_ip > /tmp/ddns_ip.txt
 fi
