@@ -10,7 +10,8 @@ services:
     volumes:
       - "./adguard/opt-adguard-work:/opt/adguardhome/work"
       - "./adguard/opt-adguard-conf:/opt/adguardhome/conf"
-      - "./unbound:/opt/unbound/etc/unbound/"
+      - "./unbound:/opt/unbound"
+      - "/usr/share/dns:/usr/share/dns:ro"
     ports:
       - 53:53/tcp # AdGuard Home DNS connection
       - 53:53/udp # AdGuard Home DNS connection
