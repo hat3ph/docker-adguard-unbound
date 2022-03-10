@@ -62,3 +62,5 @@ To use DoH/DoT/DoQ encryption, first register and apply a valid FQDN and SSL cer
 ## Disable open resolve to prevent DNS Amplication Attack
 If you run this in cloud as your provide DNS, advise to restrict DNS access to prevent DNS Amplication Attack.
 Setup cron job to run iptables_ddns_update.sh to update the iptables rule.
+Docker will re-create the docker iptables rule if you restart the container hence will mess up with the iptables rule. 
+Advice just restart the VPS to let the script setup the iptables rule again from fresh.
