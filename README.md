@@ -11,9 +11,9 @@ Contains initial unbound.conf as well
 - Install docker-compose: https://docs.docker.com/compose/install/
 - Run docker as non-root: https://docs.docker.com/engine/install/linux-postinstall/
 - Run disable_dnsstublistener.sh first to disable systemd-resolved DNS stub listener.
-- ☁ If using a cloud provider, you need to allow ingress to below port:
+- ☁ If using a cloud provider, you need to allow ingress for below port:
 
-| Port      | Comment                     |
+| Port      | Service                     |
 |-----------|------------                 |
 | 53/tcp    | AdGuard Home DNS connection |
 | 53/udp    | AdGuard Home DNS connection |
@@ -22,10 +22,10 @@ Contains initial unbound.conf as well
 | 443/tcp   | AdGuard Home web panel HTTPS|
 | 784/udp   | AdGuard Home DNS-over-QUIC  |
 | 853/tcp   | AdGuard Home DNS-over-TLS   |
-| 67-68/tcp | AdGuard Home DHCP server    |
+| 67-68/tcp | AdGuard Home DHCP service   |
 
 ## Quickstart
-To get started all you need to do is clone the repository and spin up the containers.
+To get started all you need to do is git clone the repository and spin up the containers.
 
 ```bash
 git clone https://github.com/hat3ph/docker-adguard-unbound.git
@@ -34,7 +34,7 @@ docker-compose up -d
 ```
 
 ## Modifying the upstream DNS provider for Unbound
-If you choose to not use Cloudflare any reason you are able to modify the upstream DNS provider in `unbound.conf`.
+If you choose to use Cloudflare for any reason you are able to modify the upstream DNS provider in `unbound.conf`.
 
 Search for `forward-zone` and modify the IP addresses for your chosen DNS [provider](https://docs.pi-hole.net/guides/dns/upstream-dns-providers/).
 
@@ -58,6 +58,7 @@ The IP could be your local docker host IP or public IP for your cloud VPS.
 
 ## DNS-over-HTTPS/TLS/QUIC
 To use DoH/DoT/DoQ encryption, first register and apply a valid FQDN and SSL certificate first for AdGuard Home.
+If you are using Let's Encrypt free SSL certicate, check out [link](https://ikarus.sg/lets-encrypt-dot-android/) regarding DoT connection denied with some Android device due to expired X3 root certificate.
 
 ## Disable open resolve to prevent DNS Amplication Attack
 If you run this in cloud as your provide DNS, advise to restrict DNS access to prevent DNS Amplication Attack.
