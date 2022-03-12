@@ -1,5 +1,5 @@
 ## Safe Internet with Adguard and Unbound - Solution
-This solution is a combination of AdGuard and Unbound in a docker-compose project with the intent of enabling users to quickly and easily create and deploy a personally managed ad blocking capabilities , family safe search, parental controls(via AdGuard), and DNS caching with additional privacy options (via Unbound). 
+This solution is a combination of AdGuard and Unbound in a docker-compose project with the intent of enabling users to quickly and easily create and deploy a personally managed ad blocking capabilities , family safe search, parental controls(via AdGuard), and DNS caching with additional privacy options and DNSSEC validation (via Unbound). 
 
 Docker Compose file contains:
 - adguard-unbound - https://hub.docker.com/r/lolgast/adguard-unbound
@@ -32,6 +32,11 @@ git clone https://github.com/hat3ph/docker-adguard-unbound.git
 cd docker-adguard-unbound
 docker-compose up -d
 ```
+To disable DNSSEC validation with Unbound, comment out below volume to use the default `unbound.conf`.
+```yml
+#- "./unbound:/opt/unbound"
+#- "/usr/share/dns:/usr/share/dns"
+```
 
 ## Modifying the upstream DNS provider for Unbound
 If you choose to use Cloudflare for any reason you are able to modify the upstream DNS provider in `unbound.conf`.
@@ -58,10 +63,16 @@ The IP could be your local docker host IP or public IP for your cloud VPS.
 
 ## DNS-over-HTTPS/TLS/QUIC
 To use DoH/DoT/DoQ encryption, first register and apply a valid FQDN and SSL certificate first for AdGuard Home.
+
 If you are using Let's Encrypt free SSL certicate, check out [link](https://ikarus.sg/lets-encrypt-dot-android/) regarding DoT connection denied with some Android device due to expired X3 root certificate.
 
+To manual or auto renewal Lets's Encrypt certificates, run below command with pre and post hook or copy the 2 script to `/etc/letsencrypt/renewal-hooks/pre` and `/etc/letsencrypt/renewal-hooks/post` respectively and let certbot auto renewal by itself.
+```bash
+sudo certbot renew --pre-hook /path/letsencrypt_renewal_pre_hook.sh --post-hook /path/letsencrypt_renewal_post_hook.sh --dry-run
+```
+
 ## Disable open resolve to prevent DNS Amplication Attack
-If you run this in cloud as your provide DNS, advise to restrict DNS access to prevent DNS Amplication Attack.
-Setup cron job to run iptables_ddns_update.sh to update the iptables rule.
+If you run this in cloud as your provide DNS, advise to restrict DNS access to prevent [DNS Amplication Attack](https://openresolver.com/).
+Setup cron job to run `iptables_ddns_update.sh` to update the iptables rule.
 Docker will re-create the docker iptables rule if you restart the container hence will mess up with the iptables rule. 
 Advice just restart the VPS to let the script setup the iptables rule again from fresh.
