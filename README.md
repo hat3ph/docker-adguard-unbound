@@ -10,7 +10,8 @@ Contains initial unbound.conf as well
 - Install docker: https://docs.docker.com/engine/install/
 - Install docker-compose: https://docs.docker.com/compose/install/
 - Run docker as non-root: https://docs.docker.com/engine/install/linux-postinstall/
-- Run disable_dnsstublistener.sh first to disable systemd-resolved DNS stub listener.
+- Run `disable_dnsstublistener.sh` first to disable systemd-resolved DNS stub listener.
+- Install dns-root-data (ubuntu) package for the DNSSEC key and root hints.
 - ☁ If using a cloud provider, you need to allow ingress for below port:
 
 | Port      | Service                     |
@@ -26,13 +27,12 @@ Contains initial unbound.conf as well
 
 ## Quickstart
 To get started all you need to do is git clone the repository and spin up the containers.
-
 ```bash
 git clone https://github.com/hat3ph/docker-adguard-unbound.git
 cd docker-adguard-unbound
 docker-compose up -d
 ```
-To disable DNSSEC validation with Unbound, comment out below volume to use the default `unbound.conf`.
+To disable DNSSEC validation with Unbound, comment out below volume in `docker-compose.yml` to use the default `unbound.conf`.
 ```yml
 #- "./unbound:/opt/unbound"
 #- "/usr/share/dns:/usr/share/dns"
@@ -45,8 +45,6 @@ Search for `forward-zone` and modify the IP addresses for your chosen DNS [provi
 
 >**NOTE:** The anything after `#` is a comment on the line. 
 What this means is it is just there to tell you which DNS provider you put there. It is for you to be able to reference later. I recommend updating this if you change your DNS provider from the default values.
-
-
 ```yaml
 forward-zone:
         name: "."
@@ -59,7 +57,7 @@ forward-zone:
 
 ## Access Adguard Interface (IMPORTANT)
 First connect to http://xxx.xxx.xxx.xxx:3000 first to setup AdGuard Home before DNS query and adblocking to work.
-The IP could be your local docker host IP or public IP for your cloud VPS.
+The IP could be your local docker host IP or public IP of your cloud VPS.
 
 ## DNS-over-HTTPS/TLS/QUIC
 To use DoH/DoT/DoQ encryption, first register and apply a valid FQDN and SSL certificate first for AdGuard Home.
