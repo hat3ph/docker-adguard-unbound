@@ -8,10 +8,10 @@ services:
     hostname: adguard-unbound
     # Volumes store your data between container upgrades
     volumes:
-      - "./adguard/opt-adguard-work:/opt/adguardhome/work"
-      - "./adguard/opt-adguard-conf:/opt/adguardhome/conf"
-      - "./unbound:/opt/unbound"
-      - "/usr/share/dns:/usr/share/dns:ro"
+      - "./adguard/opt-adguard-work:/opt/adguardhome/work" # adguard container work directory
+      - "./adguard/opt-adguard-conf:/opt/adguardhome/conf" # adguard container conf directory
+      - "./unbound:/opt/unbound" # map custom unbound config
+      - "/usr/share/dns:/usr/share/dns" # map DNSSEC key and root hints from dns-root-data package
     ports:
       - 53:53/tcp # AdGuard Home DNS connection
       - 53:53/udp # AdGuard Home DNS connection
@@ -22,5 +22,3 @@ services:
       #- 853:853/tcp # AdGuard Home DNS-over-TLS/QUIC service
       #- 67:67/udp # DHCP server
       #- 68:68/udp # DHCP server
-      #- 5053:5053/udp # Enable only to allow use unbound as your DNS server
-      #- 5053:5053/udp # Enable only to allow use unbound as your DNS server
