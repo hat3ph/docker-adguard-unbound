@@ -15,7 +15,7 @@ Contains initial unbound.conf as well
 - ☁ If using a cloud provider, you need to allow ingress for below port:
 
 | Port      | Service                     |
-|-----------|------------                 |
+|-----------|-----------------------------|
 | 53/tcp    | AdGuard Home DNS connection |
 | 53/udp    | AdGuard Home DNS connection |
 | 3000/tcp  | AdGuard Home web panel      |
@@ -24,6 +24,8 @@ Contains initial unbound.conf as well
 | 784/udp   | AdGuard Home DNS-over-QUIC  |
 | 853/tcp   | AdGuard Home DNS-over-TLS   |
 | 67-68/tcp | AdGuard Home DHCP service   |
+| 5053/tcp  | Unbound DNS connection      |
+| 5053/udp  | Unbound DNS connection      |
 
 ## Quickstart
 To get started all you need to do is git clone the repository and spin up the containers.
