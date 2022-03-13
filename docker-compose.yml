@@ -15,7 +15,7 @@ services:
     ports:
       - 53:53/tcp # AdGuard Home DNS connection
       - 53:53/udp # AdGuard Home DNS connection
-      - 3000:3000/tcp # AdGuard Home web panel
+      - 3000:3000/tcp # AdGuard Home install web panel. Can disable after installation is completed.
       - 80:80/tcp # AdGuard Home web panel HTTP
       #- 443:443/tcp # AdGuard Home web panel HTTPS
       #- 784:784/udp # AdGuard Home DNS-over-QUIC service
