@@ -4,7 +4,7 @@ This solution is a combination of AdGuard and Unbound in a docker-compose projec
 Docker Compose file contains:
 - adguard-unbound - https://hub.docker.com/r/lolgast/adguard-unbound
 
-Contains initial unbound.conf as well
+Contains initial unbound.conf as well.
 
 ## Prerequisites:
 - Install docker: https://docs.docker.com/engine/install/
@@ -60,6 +60,11 @@ forward-zone:
 ## Access Adguard Interface (IMPORTANT)
 First connect to http://xxx.xxx.xxx.xxx:3000 first to setup AdGuard Home before DNS query and adblocking to work.
 The IP could be your local docker host IP or public IP of your cloud VPS.
+
+Once finish the installation wizard, comment out `docker-compose.yml` to disable the wizard page.
+```yml
+#- 3000:3000/tcp # AdGuard Home web panel
+```
 
 ## DNS-over-HTTPS/TLS/QUIC
 To use DoH/DoT/DoQ encryption, first register and apply a valid FQDN and SSL certificate first for AdGuard Home.
