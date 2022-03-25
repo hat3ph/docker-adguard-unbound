@@ -10,7 +10,7 @@ if (systemctl -q is-active $SERVICE)
                 then
                 echo "Network port $PORT is running."
                 mkdir -p /etc/systemd/resolved.conf.d/
-                printf "[Resolve]\nDNS=127.0.0.1\nDNSStubListener=no" > /etc/systemd/resolved.conf.d/adguardhome.conf
+                printf "[Resolve]\nDNS=127.0.0.1\nDNSStubListener=no" > /etc/systemd/resolved.conf.d/disable_dnsstublistener.conf
                 mv /etc/resolv.conf /etc/resolv.conf.backup
                 ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
 		echo "Restarting $SERVICE"
