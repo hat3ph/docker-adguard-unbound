@@ -32,7 +32,7 @@ To get started all you need to do is git clone the repository and spin up the co
 ```bash
 git clone https://github.com/hat3ph/docker-adguard-unbound.git
 cd docker-adguard-unbound
-docker-compose up -d
+docker compose up -d
 ```
 To disable DNSSEC validation with Unbound, comment out below volume in `docker-compose.yml` to use the default `unbound.conf`.
 ```yml
