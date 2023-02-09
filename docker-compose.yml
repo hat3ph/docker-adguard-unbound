@@ -22,5 +22,5 @@ services:
       #- 853:853/tcp # AdGuard Home DNS-over-TLS/QUIC service
       #- 67:67/udp # DHCP server
       #- 68:68/udp # DHCP server
-      #- 5053:5053/tcp # Uncomment to enable unbound access on local server
-      #- 5053:5053/udp # Uncomment to enable unbound access on local server
+      - 5053:5053/tcp # Uncomment to enable unbound access on local server
+      - 5053:5053/udp # Uncomment to enable unbound access on local server
