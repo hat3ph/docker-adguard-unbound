@@ -36,8 +36,8 @@ docker compose up -d
 ```
 To enable Unbound DNS service, comment out below ports in `docker-compose.yml`. The service will listen to local interface (127.0.0.1) for both TCP/UDP port.
 ```yml
-#- 5035:5035/tcp # Uncomment to enable unbound access on local server
-#- 5035:5035/udp # Uncomment to enable unbound access on local serve
+#- 5053:5053/tcp # Uncomment to enable unbound access on local server
+#- 5053:5053/udp # Uncomment to enable unbound access on local serve
 ```
 To disable DNSSEC validation with Unbound, comment out below volume in `docker-compose.yml` to use the default `unbound.conf`.
 ```yml
