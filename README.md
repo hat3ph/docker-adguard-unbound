@@ -11,7 +11,7 @@ Contains initial unbound.conf as well.
 - Install docker-compose: https://docs.docker.com/compose/install/
 - Run docker as non-root: https://docs.docker.com/engine/install/linux-postinstall/
 - Run `disable_dnsstublistener.sh` first to disable systemd-resolved DNS stub listener.
-- Install dns-root-data (ubuntu) package for the DNSSEC key and root hints.
+- Install dns-root-data (ubuntu) package for the Unbound's DNSSEC key and root hints.
 - ☁ If using a cloud provider, you need to allow ingress for below port:
 
 | Port      | Service                       |
