@@ -2,7 +2,7 @@
 This solution is a combination of AdGuard and Unbound in a docker-compose project with the intent of enabling users to quickly and easily create and deploy a personally managed ad blocking capabilities , family safe search, parental controls (via AdGuard), and DNS caching with additional privacy options and DNSSEC validation (via Unbound). 
 
 Docker Compose file contains:
-- adguard-unbound - https://hub.docker.com/r/lolgast/adguard-unbound
+- adguard-unbound - https://github.com/hat3ph/adguard-unbound
 
 Contains initial unbound.conf as well.
 
