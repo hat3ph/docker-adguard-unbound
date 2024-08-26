@@ -11,7 +11,6 @@ Contains initial unbound.conf as well.
 - Install docker-compose: https://docs.docker.com/compose/install/
 - Run docker as non-root: https://docs.docker.com/engine/install/linux-postinstall/
 - Run `disable_dnsstublistener.sh` first to disable systemd-resolved DNS stub listener.
-- Install dns-root-data (ubuntu) package for the Unbound's DNSSEC key and root hints.
 - ☁ If using a cloud provider, you need to allow ingress for below port:
 
 | Port      | Service                       |
@@ -34,10 +33,11 @@ git clone https://github.com/hat3ph/docker-adguard-unbound.git
 cd docker-adguard-unbound
 docker compose up -d
 ```
-To disable DNSSEC validation with Unbound, comment out below volume in `docker-compose.yml` to use the default `unbound.conf`.
-```yml
-#- "./unbound:/opt/unbound"
-#- "/usr/share/dns:/usr/share/dns"
+
+## Local Unbound DNS Server with DNSSEC validation
+To use Unbound as local DNS server with DNSSEC validation, use below entry as your DNS upstream server under Settings -> DNS Settings.
+```bash
+127.0.0.1:5053
 ```
 
 ## Modifying the upstream DNS provider for Unbound

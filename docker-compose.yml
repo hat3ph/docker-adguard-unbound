@@ -11,7 +11,6 @@ services:
       - "./adguard/opt-adguard-work:/opt/adguardhome/work" # adguard container work directory
       - "./adguard/opt-adguard-conf:/opt/adguardhome/conf" # adguard container conf directory
       - "./unbound:/opt/unbound" # map custom unbound config
-      - "/usr/share/dns:/usr/share/dns" # map DNSSEC key and root hints from dns-root-data package
     ports:
       - 53:53/tcp # AdGuard Home DNS connection
       - 53:53/udp # AdGuard Home DNS connection
@@ -22,5 +21,3 @@ services:
       #- 853:853/tcp # AdGuard Home DNS-over-TLS/QUIC service
       #- 67:67/udp # DHCP server
       #- 68:68/udp # DHCP server
-      - 5053:5053/tcp # Uncomment to enable unbound access on local server
-      - 5053:5053/udp # Uncomment to enable unbound access on local server
