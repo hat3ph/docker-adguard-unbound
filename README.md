@@ -7,16 +7,6 @@ Docker Compose file contains:
 Contains initial unbound.conf as well.
 
 ## Prerequisites:
-### For using Docker:
-- Install docker: https://docs.docker.com/engine/install/
-- Install docker-compose: https://docs.docker.com/compose/install/
-- Run docker as non-root: https://docs.docker.com/engine/install/linux-postinstall/
-
-### For using Podman
-- Install podman and podman-compose
-  - Ubuntu 24.04: `sudo apt-get install podman podman-compose`
-  - CentOS 9: `sudo yum install epel-release && sudo yum install podman podman-compose`
-
 - Run `disable_dnsstublistener.sh` first to disable systemd-resolved DNS stub listener.
 - ☁ If using a cloud provider, you need to allow ingress for below port:
 
@@ -32,6 +22,16 @@ Contains initial unbound.conf as well.
 | 67-68/tcp | AdGuard Home DHCP service     |
 | 5053/tcp  | Unbound DNS connection        |
 | 5053/udp  | Unbound DNS connection        |
+
+### For using Docker:
+- Install docker: https://docs.docker.com/engine/install/
+- Install docker-compose: https://docs.docker.com/compose/install/
+- Run docker as non-root: https://docs.docker.com/engine/install/linux-postinstall/
+
+### For using Podman
+- Install podman and podman-compose
+  - Ubuntu 24.04: `sudo apt-get install podman podman-compose`
+  - CentOS 9: `sudo yum install epel-release && sudo yum install podman podman-compose`
 
 ## Quickstart
 To get started all you need to do is git clone the repository and spin up the containers.
@@ -50,6 +50,17 @@ podman compose up -d
 ```
 
 ## Podman FAQ
+### Run rootful VS rootless podman container
+You can run rootful container with root full access or rootless container for enhanced security using podman.
+```bash
+# enable rootfull system wide podman service
+sudo systemctl enable --now podman.socket
+sudo podman compose -f docker-compose.yml up -d
+
+# enable rootless podman service
+systemctl --user enable --now podman.socket
+podman compose -f docker-compose.yml up -d
+```
 ### Not able to bind port 53
 ```bash
 Error: cannot listen on the UDP port: listen udp4 :53: bind: address already in use
@@ -79,9 +90,9 @@ echo "net.ipv4.ip_unprivileged_port_start=53" | sudo tee /etc/sysctl.d/20-dns-pr
 To enable container auto-start during host reboot, enable the podman-restart service.
 ```bash
 # enable system-wide podman service
-sudo systemctl enable --now podman.socket && sudo systemctl enable --now podman-restart.service
+sudo systemctl enable --now podman-restart.service
 # enable rootless podman service
-systemctl --user enable --now podman.socket && systemctl --user enable --now podman-restart.service
+systemctl --user enable --now podman-restart.service
 ```
 Edit `docker-compose.yml` and change restart policy to [always](https://github.com/containers/podman/issues/20418).
 ```yml
