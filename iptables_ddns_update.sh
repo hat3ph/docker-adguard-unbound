@@ -30,8 +30,8 @@ current_ddns_ip=`cat /tmp/ddns_ip.txt`
 if [ $ddns_ip != $current_ddns_ip ]; then
         #echo "No same IP"
 	# update iptables rules by rules number
-	/sbin/iptables -R DOCKER 4 -p tcp --dport 53 -s $ddns_ip -j ACCEPT
-	/sbin/iptables -R DOCKER 5 -p udp --dport 53 -s $ddns_ip -j ACCEPT
+	/sbin/iptables -R INPUT 4 -p tcp --dport 53 -s $ddns_ip -j ACCEPT
+	/sbin/iptables -R INPUT 5 -p udp --dport 53 -s $ddns_ip -j ACCEPT
 	# update/save the latest ddns ip to ddns_ip.txt
 	echo $ddns_ip > /tmp/ddns_ip.txt
 fi
