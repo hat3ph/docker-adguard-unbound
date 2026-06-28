@@ -12,6 +12,7 @@
 ddns_host="xxx.ddns.net"
 
 # extract your latest dynamic IP from the ddns hostname
+# require dnsutils package
 ddns_ip=`host $ddns_host | cut -d ' ' -f 4`
 
 # create the ddns_ip.txt if missing
